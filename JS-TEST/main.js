@@ -5,6 +5,93 @@
 
 
 
+
+
+
+
+
+
+// -------------------------------------------------------------------
+// this
+// 일반(normal) 함수는 호출 위치에 따라 this 정의!
+// 화살표(arrow) 함수는 자신이 선언된 함수 범위에서 this 정의!
+// const t = {
+//     name: 'Heropy',
+//     a :function(() => {
+//         console.log(this.name)
+//     });
+// }
+// heropy.normal()
+// heropy.arrow()
+
+// const amy = {
+//     name: 'Amy',
+//     normal: heropy.normal,
+//     arrow: heropy.arrow
+// }
+// amy.normal()
+// amy.arrow()
+
+
+
+
+// const timer = {
+//     name: 'he',
+//     timeout: function() {
+//         setTimeout(function(){
+//             console.log(this.name)
+//         },2000)
+//     }
+
+// }
+// timer.timeout()
+
+// const timer = {
+//     name: 'he',
+//     timeout: function() {
+//         setTimeout(() => {
+//             console.log(this.name)
+//         },2000)
+//     }
+// }
+// timer.timeout()
+// function User(name){
+//     this.name = name
+// }
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------
+// const hero ={
+//     firstName : 'heropy',
+//     lastName : 'park',
+//     getFullName : function(){
+//         return `${this.firstName} ${this.lastName}`
+//     }
+// }
+
+
+// function User(first, last){
+//     this.firstName = first
+//     this.lastName = last
+// }
+// User.prototype.getFullName = function(){
+//     return `${this.firstName} ${this.lastName}`
+// }
+
+// const hero = new User('heropy','park')
+// const choi = new User('jinwoong','choi')
+
+// console.log(hero.getFullName())
+// console.log(choi)
+
+
+
 //-------------------------------------------------------------------
 // 콜백 (Callback)
 // 함수의 인수로 사용되는 함수!
