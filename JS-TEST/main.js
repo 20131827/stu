@@ -1,10 +1,146 @@
 //-------------------------------------------------------------------
+// indexOf를 사용하면 인수값과 일치하는 인덱스번호를 알수있다 
+// 일치하는 값이 없을경우 -1을 반환함!
+const r = 'Hello world!'.indexOf('w')
+console.log(r);     //6 출력
+
+
+// length를 사용하면 문자열의 글자가 몇개인지 알수있다
+const str = '0123'
+console.log(str.length);        //4 출력
+console.log('0123'.length);     //4 출력
+
+// indexOf 뒤에 (부정비교연산) !== 을 통하여 true||false 값으로 반환 받을 수 있다 
+const str1 = 'Hello world!'
+console.log(str1.indexOf('world!') !== -1);     //true 출력
+
+
+// slice(추출을 시작할 인덱스 번호, 추출을 끝낼 인덱스 번호-1)를 사용하면
+// 문자열의 일부를 추출해서 새로운 문자열을 반환한다
+const str2 = 'Hello world!'
+console.log(str2.slice(0,3));   //Hel 출력
+console.log(str2.slice(6,11));  //world 출력
+
+
+// replace('교체당할 문자열', '교체되어서 들어갈 문자열')을 사용하면
+// 문자열의 내용을 교체할 수 있다
+const str3 = 'Hello world!'
+console.log(str3.replace('world', 'Jinwoong'));  //Hello Jinwoong! 출력
+console.log(str3.replace('world!', ''));         //Hello 출력
+
+
+// 정규표현식..?
+ const str4 = 'qwaszx3677@naver.com'
+ console.log(str4.match(/.+(?=@)/)[0]);  //qwaszx3677 출력
+
+
+// trim() 을 사용하면 불필요한 공백을 삭제시켜준다
+ const str5 = '    Hello world!   '
+ console.log(str5);              //    Hello world!    출력(공백 포함)
+ console.log(str5.trim());       //Hello world! 출력(불필요한 공백 사라짐)
+
+
+
+
+
+//-------------------------------------------------------------------
+ //상속(확장)
+
+
+//  class Vehicle{
+//      constructor(name, wheel){
+//         this.name = name
+//         this.wheel = wheel
+//      }
+//  }
+// const myVehicle = new Vehicle('운송수단',2)
+// console.log(myVehicle)
+// console.log(myVehicle.name)
+// console.log(myVehicle.wheel)
+
+// extends가 확장(상속)의 의미를 갖게 만드는 키워드입니다.
+// class Bicycle extends Vehicle{
+//      constructor(name, wheel){
+//          super(name,wheel)
+//      }
+//  }
+//  const mYBicycle = new Bicycle('최진웅자전거',2)
+//  console.log(mYBicycle)
+
+
+// Bicycle 클래스의 경우 부모클래스가 가지고있는 로직을 가져와서 그대로 사용한 반면에
+// Car 클래스는 부모클래스가 가지고있는 로직에 새로운 로직을 추가해서 사용하고있다
+//  class Car extends Vehicle{
+//      constructor(name, wheel, license){
+//          super(name,wheel)
+//          this.license = license
+//      }
+//  }
 
 
 
 
 
 
+//-------------------------------------------------------------------
+// ES6 Classes
+
+
+// const jin = {
+//     name: 'jinwoong',
+//     normal: function () {
+//         console.log(this.name)
+//     },
+//     arrow: () => {
+//         console.log(this.name)
+//     }
+// }
+
+// jin 객체 안에 normal이라는 이름의 함수를 축약해서 사용할 수 있다.
+// 어떤 이름이 나오고 그 뒤에 소괄호 ( ) 바로 그뒤에 중괄호 { }가 나오면 function 키워드를 사용해서 일반함수로
+// 만드는 개념과 동일하다!
+// const jin = {
+//     name: 'jinwoong',
+//     normal() {
+//         console.log(this.name)
+//     },
+//     arrow: () => {
+//         console.log(this.name)
+//     }
+// }
+
+
+// User라는 이름의 생성자 함수 정의
+// function User(first, last){
+//     this.firstName = first
+//     this.lastName = last
+// }
+// 생성자 함수에 getFullName이라는 이름의 프로토타입 함수를 생성
+// User.prototype.getFullName = function () {
+//     return `${this.firstName} ${this.lastName}`
+// }
+
+// 위의 생성자와 프로토 타입함수를 class로 정의하여 더욱 간결하게 작성해보자
+// class User{
+//     constructor(first, last){   //constructor또한 하나의 함수라고 생각하면 된다
+//         this.firstName = first
+//         this.lastName = last
+//     }
+//     getFullName(){  //프로토타입으로 선언하지않아도 class를 사용하면 함수를 생성할 수 있다!
+//         return `${this.firstName} ${this.lastName}`
+//     }
+// }
+
+
+// new를 사용해서 인스턴스(객체) 생성
+// const heropy = new User('Heropy', 'Park')
+// const jin = new User('Jinwoong', 'Choi')
+// const song = new User('Yousong', 'Kim')
+// heropy 부분은 객체 데이터를 출력
+// jin, song은 getFullName함수 호출후 결과값 출력
+// console.log(heropy)
+// console.log(jin.getFullName())
+// console.log(song.getFullName())
 
 
 
