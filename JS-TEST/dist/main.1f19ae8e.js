@@ -119,44 +119,212 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"main.js":[function(require,module,exports) {
 //-------------------------------------------------------------------
+// .filter()
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // 총 4번의 리턴을 한다!! numbers의 요소가 4개이기 때문
+// // 원본 데이터에 변화를 주지않음!
+// const a = numbers.map(item => {
+//     return item < 3
+// })
+// //const a = numbers.map(item =>  item < 3) //람다식으로 고친 코드!
+// console.log(a);     //출력값 [true, true, false, false]
+// // filter메소드는 조건이 true인 경우에만 데이터를 반환해준다(필터링)
+// // 원본 데이터에 변화를 주지않음!
+// const b = numbers.filter(item => {
+//     return item < 3
+// })
+// //const b = numbers.filter(item => item < 3)  //람다식으로 고친 코드!
+// console.log(b);     //출력값 [1, 2]
+// // .find()  || .finfIndex()
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // find() 함수는 배열(fruits)의 요소 갯수 만큼 반복됨
+// // find() 함수의 조건으로 true가 반환되면 반복을 멈추고
+// // true를 만족시키는 데이터를 함수의 반환값으로 넘겨준다
+// const a = fruits.find(itme => {
+//     return/^B/.test(itme)       //(조건) B로 시작하는가?
+// })
+// //const a = fruits.find(itme => /^B/.test(itme))        //위의 코드를 람다식으로 고침!
+// console.log(a);     //출력값 : Banana
+// // 함수의 조건으로 true가 반환되면 반복을 멈추고
+// // true를 만족시키는 데이터의 인덱스 번호(제로베이스드)를 반환값으로 넘겨준다!
+// const b = fruits.findIndex(itme => {
+//     return/^B/.test(itme)       //(조건) B로 시작하는가?
+// })
+// //const b = fruits.findIndex(itme => /^B/.test(itme))     //위의 코드를 람다식으로 고침
+// console.log(b);     //출력값 : 1
+// // .includes()
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // numbers 배열에 3 이라는 데이터가 포함되어있냐? true flase로 반환해줘
+// const a = numbers.includes(3)
+// console.log(a);
+// // fruits0 배열에 Jin 이라는 데이터가 포함되어있냐? true flase로 반환해줘
+// const b = fruits.includes('Jin')
+// console.log(b);
+// // .push()    ||    .unshift()
+// // 원본 데이터가 수정된다 주의!!
+// // push는 배열의 가장뒷쪽에 데이터 삽입 || unshift는 배열의 가장앞쪽에 데이터 삽입
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // numbers배열 가장 뒷쪽 부분에 5라는 데이터를 삽입한다
+// numbers.push(5)
+// console.log(numbers);
+// // numbers배열 가장 앞쪽 부분에 0이라는 데이터를 삽입한다
+// numbers.unshift(0)
+// console.log(numbers);
+// // .reverse()
+// // 원본 데이터가 수정된다 주의!!
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // numbers배열의 순서를 뒤집어서 저장한다
+// numbers.reverse()
+// // fruits배열의 순서를 뒤집어서 저장한다
+// fruits.reverse()
+// console.log(numbers);   //출력값 : [4, 3, 2, 1]
+// console.log(fruits);    //출력값 : ['orange', 'Banana', 'Apple']
+// .splice()
+// 원본 데이터가 수정된다 주의!!
+var numbers = [1, 2, 3, 4];
+var fruits = ['Apple', 'Banana', 'orange']; // splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지)
+// numbers.splice(2, 1)    // 2번인덱스 부터 1개의 요소를 지워라는 뜻
+// console.log(numbers);   // 출력값 : [1, 2, 4]
+// splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지, 삭제를 시작할 인덱스 번호에 넣고싶은 데이터를 입력)
+
+numbers.splice(2, 0, 999); // 2번인덱스 부터 개의 요소를 지우고 999를 삽입해라
+
+console.log(numbers); // 출력값 : [1, 2, 4]
+//
+//
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// console.log(numbers);
+// console.log(fruits);
+//-------------------------------------------------------------------
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana']
+// console.log(numbers);   //[1, 2, 3, 4] 출력
+// console.log(fruits);    //['Apple', 'Banana'] 출력
+// console.log(fruits[0]); //Apple 출력
+// .find
+// const array1 = [5, 12, 8, 130, 44];
+// const found = array1.find(element => element > 10);
+//array1 배열의 1번째 요소부터 검사를 해서 해당 조건의 결과값으로 true가 나오면 그 요소를 반환함
+// console.log(found); //출력값 12
+// .length  렝스는 배열속에 요소가 몇개 있는지 반환해주는 매소드이다
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana']
+// console.log(numbers.length);    //출력값 4
+// console.log(fruits.length);     //출력값 4
+// console.log([1,2].length);      //출력값 2
+// console.log([].length);         //출력값 0
+// // .concat()  콘켓을 사용하면 기존배열에다가 다른 배열의 데이터를 삽입할 수 있다
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana']
+// // 콘켓을 사용하면 원본 데이터값에 변화를 주지 않고 사용이 가능!
+// console.log(numbers.concat(fruits));    //출력값 [1, 2, 3, 4, 'Apple', 'Banana']
+// console.log(numbers);     //출력값 [1, 2, 3, 4]
+// console.log(fruits);      //출력값 ['Apple', 'Banana']
+// // .forEach() 사용하려는 배열의 요소갯수만큼 반복된다!
+// // fruits배열에 forEach()를 사용하면 3번 반복문이 동작한다
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// // 매소드의 인수로 사용되는 함수를 콜백함수라고 한다 아래의 경우 이름이 없으니까 
+// // 익명함수이면서 콜백함수이다
+// // forEach가 실행될때 element부분에는 데이터값이 넘어오고 
+// // index에는 제로베이스드의 인덱스 값이 넘어오고
+// // array부분에는 forEach()를 사용하고있는 배열데이터를 지칭함 아래의 경우 fruits를 의미
+// fruits.forEach(function (element, index, array) {
+//     console.log(element, index, array)
+// }) // 출력값
+// // Apple 0 (3) ['Apple', 'Banana', 'orange']
+// // Banana 1 (3) ['Apple', 'Banana', 'orange']
+// // orange 2 (3) ['Apple', 'Banana', 'orange']
+// // arry부분은 잘 사용하지 않기 때문에 아래처럼 사용을 많이 한다
+// fruits.forEach(function (element, index) {
+//     console.log(element, index)
+// })      //출력값
+// // Apple 0
+// // Banana 1
+// // orange 2
+// // .map()
+// //forEach()는 반환되는 값이 없는 반면에 map은 반환되는 값이 있다!!
+// const numbers = [1, 2, 3, 4]
+// const fruits = ['Apple', 'Banana', 'orange']
+// const a = fruits.forEach(function (item, i){
+//     console.log(`${item}-${i}`);   
+// }) 
+// console.log(a); // 출력값 undefined
+// const b = fruits.map(function (item, i){
+//      return `${item}-${i}`
+// })
+// console.log(b); // 출력값 ['Apple-0', 'Banana-1', 'orange-2']
+// // map()은 객체 리터럴 방식으로도 사용이 가능!
+// const c = fruits.map(function (item, i){
+//     return {
+//         id: i,
+//         name: item
+//     }
+// })
+// console.log(c); // return형식이 객체 데이터를 반환하기 때문에 객체가 담겨진 배열을 const c에 담는다!
+// // 0번 인덱스 값(객체) : {id: 0, name: 'Apple'}
+// // 1번 인덱스 값(객체) : {id: 1, name: 'Banana'}
+// // 2번 인덱스 값(객체) : {id: 2, name: 'orange'}
+// // forEach문과 map함수를 사용한 코드를 람다(화살표)함수로 바꿔보자!
+// const d = fruits.forEach((item, i) => {
+//     console.log(`${item}-${i}`);   
+// }) 
+// console.log(d);
+// //map 함수에는 따로 로직이 구현되어있지않고 return만 있기 때문에 중괄호와 return을 생략해서
+// //작성할 수 있다 하지만 반환되는 내용이 객체이기 때문에 ( )소화로호 묶어둔 뒤 그안에 { } 중괄호
+// //를 사용해서 객체를 작성해줘야 한다
+// const e = fruits.map((item, i) =>({ id: i, name: item}))
+// console.log(e);
+//-------------------------------------------------------------------
+// const pi = 3.141592
+// console.log(pi);
+// // 숫자 데이터에 toFixed(표시할 소숫점 자리)를 사용하면 입력된 소숫점 자리 까지만 보여준다
+// const str= pi.toFixed(2)
+// console.log(str);
+// // typeof를 사용하면 어떤 타입의 변수인지 알려준다
+// console.log(typeof str);
+// const integer = parseInt(str)
+// const float = parseFloat(str)
+// console.log(integer);
+// console.log(float);
+// console.log(typeof integer, typeof float);
+// // Math.abs() 함수는 주어진 숫자의 절대값을 반환합니다. 
+// // x가 양수이거나 0이라면 x를 리턴하고, x가 음수라면 x의 반대값, 즉 양수를 반환합니다.
+//-------------------------------------------------------------------
 // indexOf를 사용하면 인수값과 일치하는 인덱스번호를 알수있다 
 // 일치하는 값이 없을경우 -1을 반환함!
-var r = 'Hello world!'.indexOf('w');
-console.log(r); //6 출력
-// length를 사용하면 문자열의 글자가 몇개인지 알수있다
-
-var str = '0123';
-console.log(str.length); //4 출력
-
-console.log('0123'.length); //4 출력
-// indexOf 뒤에 (부정비교연산) !== 을 통하여 true||false 값으로 반환 받을 수 있다 
-
-var str1 = 'Hello world!';
-console.log(str1.indexOf('world!') !== -1); //true 출력
-// slice(추출을 시작할 인덱스 번호, 추출을 끝낼 인덱스 번호-1)를 사용하면
-// 문자열의 일부를 추출해서 새로운 문자열을 반환한다
-
-var str2 = 'Hello world!';
-console.log(str2.slice(0, 3)); //Hel 출력
-
-console.log(str2.slice(6, 11)); //world 출력
-// replace('교체당할 문자열', '교체되어서 들어갈 문자열')을 사용하면
-// 문자열의 내용을 교체할 수 있다
-
-var str3 = 'Hello world!';
-console.log(str3.replace('world', 'Jinwoong')); //Hello Jinwoong! 출력
-
-console.log(str3.replace('world!', '')); //Hello 출력
-// 정규표현식..?
-
-var str4 = 'qwaszx3677@naver.com';
-console.log(str4.match(/.+(?=@)/)[0]); //qwaszx3677 출력
-// trim() 을 사용하면 불필요한 공백을 삭제시켜준다
-
-var str5 = '    Hello world!   ';
-console.log(str5); //    Hello world!    출력(공백 포함)
-
-console.log(str5.trim()); //Hello world! 출력(불필요한 공백 사라짐)
+// const r = 'Hello world!'.indexOf('w')
+// console.log(r);     //6 출력
+// // length를 사용하면 문자열의 글자가 몇개인지 알수있다
+// const str = '0123'
+// console.log(str.length);        //4 출력
+// console.log('0123'.length);     //4 출력
+// // indexOf 뒤에 (부정비교연산) !== 을 통하여 true||false 값으로 반환 받을 수 있다 
+// const str1 = 'Hello world!'
+// console.log(str1.indexOf('world!') !== -1);     //true 출력
+// // slice(추출을 시작할 인덱스 번호, 추출을 끝낼 인덱스 번호-1)를 사용하면
+// // 문자열의 일부를 추출해서 새로운 문자열을 반환한다
+// const str2 = 'Hello world!'
+// console.log(str2.slice(0,3));   //Hel 출력
+// console.log(str2.slice(6,11));  //world 출력
+// // replace('교체당할 문자열', '교체되어서 들어갈 문자열')을 사용하면
+// // 문자열의 내용을 교체할 수 있다
+// const str3 = 'Hello world!'
+// console.log(str3.replace('world', 'Jinwoong'));  //Hello Jinwoong! 출력
+// console.log(str3.replace('world!', ''));         //Hello 출력
+// // 정규표현식..?
+//  const str4 = 'qwaszx3677@naver.com'
+//  console.log(str4.match(/.+(?=@)/)[0]);  //qwaszx3677 출력
+// // trim() 을 사용하면 불필요한 공백을 삭제시켜준다
+//  const str5 = '    Hello world!   '
+//  console.log(str5);              //    Hello world!    출력(공백 포함)
+//  console.log(str5.trim());       //Hello world! 출력(불필요한 공백 사라짐)
 //-------------------------------------------------------------------
 //상속(확장)
 //  class Vehicle{
@@ -474,7 +642,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63075" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54361" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
