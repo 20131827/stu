@@ -119,6 +119,34 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"main.js":[function(require,module,exports) {
 //-------------------------------------------------------------------
+//  // Object.assign()
+// const target = { a: 1, b: 2 };
+// const source = { b: 4, c: 5 };
+// // target 객체에 source를 병합한다는 의미 <중복되는 데이터를 덮어씀>
+// const returnedTarget = Object.assign(target, source);
+// console.log(target);                // 출력값:  Object { a: 1, b: 4, c: 5 }
+// console.log(returnedTarget);        // 출력값:  Object { a: 1, b: 4, c: 5 }
+// Object.assign()
+var userAge = {
+  // key : value
+  name: 'jinwoong',
+  age: 35
+};
+var userEmail = {
+  name: 'jinwoong',
+  email: 'qwaszx3677@naer.com'
+};
+var target = Object.assign(userAge, userEmail);
+console.log(target);
+console.log(userAge);
+console.log(target === userAge);
+var a = {
+  k: 123
+};
+var b = {
+  k: 123
+};
+console.log(a === b); //-------------------------------------------------------------------
 // .filter()
 // const numbers = [1, 2, 3, 4]
 // const fruits = ['Apple', 'Banana', 'orange']
@@ -184,23 +212,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 // fruits.reverse()
 // console.log(numbers);   //출력값 : [4, 3, 2, 1]
 // console.log(fruits);    //출력값 : ['orange', 'Banana', 'Apple']
-// .splice()
-// 원본 데이터가 수정된다 주의!!
-var numbers = [1, 2, 3, 4];
-var fruits = ['Apple', 'Banana', 'orange']; // splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지)
-// numbers.splice(2, 1)    // 2번인덱스 부터 1개의 요소를 지워라는 뜻
-// console.log(numbers);   // 출력값 : [1, 2, 4]
-// splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지, 삭제를 시작할 인덱스 번호에 넣고싶은 데이터를 입력)
-
-numbers.splice(2, 0, 999); // 2번인덱스 부터 개의 요소를 지우고 999를 삽입해라
-
-console.log(numbers); // 출력값 : [1, 2, 4]
-//
-//
+// // .splice()
+// // 원본 데이터가 수정된다 주의!!
 // const numbers = [1, 2, 3, 4]
 // const fruits = ['Apple', 'Banana', 'orange']
-// console.log(numbers);
-// console.log(fruits);
+// // splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지)
+// numbers.splice(2, 1)    // 2번인덱스 부터 1개의 요소를 지워라는 뜻
+// console.log(numbers);   // 출력값 : [1, 2, 4]
+// // splice(삭제를 시작할 인덱스 번호, 시작번호부터 몇개를 삭제할지, 삭제를 시작할 인덱스 번호에 넣고싶은 데이터를 입력)
+// numbers.splice(2, 0, 999)    // 2번인덱스 부터 개의 요소를 지우고 999를 삽입해라
+// console.log(numbers);   // 출력값 : [1, 2, 999, 3, 4]
 //-------------------------------------------------------------------
 // const numbers = [1, 2, 3, 4]
 // const fruits = ['Apple', 'Banana']
