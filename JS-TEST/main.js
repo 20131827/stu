@@ -1,4 +1,72 @@
 //-------------------------------------------------------------------
+
+
+
+
+
+
+//-------------------------------------------------------------------
+
+// // assign( )*   [원본데이터 손상]
+// // 하나의 대상객체에  하나 이상의 객체를 병합한다[복사] !!
+// const a = {a: 1, b: 2}
+// const b = {b: 4, c: 5}
+// const c = {c: 10, d: 22}
+// // 첫번째 인수인t에다가 두번째 인수인s를 병합해서 reT에 대입한다
+// const re = Object.assign(a, b)
+
+// console.log(a);     // {a: 1, b: 4, c: 5}
+// console.log(b);     // {b: 4, c: 5}
+// console.log(re);   //{a: 1, b: 4, c: 5}
+// // a에 b를 병합한 그 자체를 re에 대입했기 때문에 
+// console.log(a === re);  // true 같은 메모리의 주소를 참조해서 사용하기 때문에 완전 같은녀석이다.
+
+
+// // 첫번째 인수에다가 2번째, 3번쨰, 4번째... 인수들을 병합해준다!!
+// Object.assign(b, a, c)
+// console.log(b);     // {b: 4, c: 10, a: 1, d: 22}
+
+
+
+// // 원본데이터에 손상을 주지않고 객체를 복사하는 방법!
+// const a = {a: 1, b: 2}
+// // 첫번째 인수인 {} 비어있는 객체에 a를 병합해서 re에 대입했다.
+// const re = Object.assign({}, a)
+
+// console.log(a);     // {a: 1, b: 2} 
+// console.log(re);    // {a: 1, b: 2} 
+// console.log(a === re);  // flase
+// // assign의 첫번째 인수로 비어있는 객체에 a를 병합하였고 그값을 re에
+// // 대입했기 때문에 a와 re는 다른 메모리를 사용하고 있으므로 false 출력이된다
+// // re는 assign의 첫번째 인수인 {} 비어있는 객체의 메모리 주소를 사용하고있다! 
+
+
+// // key()
+// // 사용법 : Object.keys(객체)
+// // keys의 반환(retrun)형은 배열입니다.
+// const user = {
+//     name: 'jinwoong',
+//     age: 28,
+//     email: 'qwaszx3677@naver.com'
+// }
+
+// // Object.keys( )의 리턴형은 배열형 이다!
+// const k = Object.keys(user)
+// console.log(k);     // ['name', 'age', 'email']
+
+// console.log(user['email']);     // qwaszx3677@naver.com
+
+// const values = k.map(k => user[k])
+// console.log(values);        // ['jinwoong', 28, 'qwaszx3677@naver.com']
+
+// // 위의 람다 코드가 일반함수일때는 아래의 코드가 된다
+// const v = k.map(function(k){
+//     return user[k]
+// })
+// console.log(v);             // ['jinwoong', 28, 'qwaszx3677@naver.com']
+
+
+//-------------------------------------------------------------------
 //  // Object.assign()
 // const target = { a: 1, b: 2 };
 // const source = { b: 4, c: 5 };
@@ -10,28 +78,28 @@
 
 
 
-// Object.assign()
-const userAge = {
-    // key : value
-    name: 'jinwoong',
-    age: 35
-}
-const userEmail = {
-    name: 'jinwoong',
-    email: 'qwaszx3677@naer.com'
-}
-// 객체.assign은 사용할 수 없다 왜냐하면 프로토 타입 함수가 아니기 때문!
-// Object.assign만 가능! 스태틱매소드 이기 떄문!
-const target = Object.assign(userAge, userEmail)
-console.log(target);    //출력값 : {name: 'jinwoong', age: 35, email: 'qwaszx3677@naer.com'}
-console.log(userAge);   //출력값 : {name: 'jinwoong', age: 35, email: 'qwaszx3677@naer.com'}
-console.log(target === userAge);    //출력값 :  true
-// === 이랑 equlse랑 똑같음!!
+// // Object.assign()
+// const userAge = {
+//     // key : value
+//     name: 'jinwoong',
+//     age: 35
+// }
+// const userEmail = {
+//     name: 'jinwoong',
+//     email: 'qwaszx3677@naer.com'
+// }
+// // 객체.assign은 사용할 수 없다 왜냐하면 프로토 타입 함수가 아니기 때문!
+// // Object.assign만 가능! 스태틱매소드 이기 떄문!
+// const target = Object.assign(userAge, userEmail)
+// console.log(target);    //출력값 : {name: 'jinwoong', age: 35, email: 'qwaszx3677@naer.com'}
+// console.log(userAge);   //출력값 : {name: 'jinwoong', age: 35, email: 'qwaszx3677@naer.com'}
+// console.log(target === userAge);    //출력값 :  true
+// // === 이랑 equlse랑 똑같음!!
 
-const a = {k: 123}
-const b = {k: 123}
-console.log(a === b);       //출력값 :  false
-// === 이랑 equlse랑 똑같음!!
+// const a = {k: 123}
+// const b = {k: 123}
+// console.log(a === b);       //출력값 :  false
+// // === 이랑 equlse랑 똑같음!!
 
 
 

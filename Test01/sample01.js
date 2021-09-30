@@ -1,67 +1,150 @@
 //=====================================================================================================================================================================
 
 
-//            문자열          배열             객체
-// length       O              O                X
-// forEach      X              O                X
-// forIn        O              O                O
-// forOf        O              O                X
-// map          X              O                X
-//             ' '            [ ]              { }
-//                            index           property
-
-let str = 'hello'
-let ar = ['tiger', 20, 3, '4']
-let ins = {key: 'value', name: '진웅', age: 28}
-
-// length
-console.log(str.length);    // 5
-console.log(ar.length);     // 4
-console.log(ins.length);    // undefined
 
 
-// forEach
-ar.forEach((item, index) => {
-    console.log(`인덱스값 : ${index}    요소값 : ${item}`);
-})
-// 출력값
-// 인덱스값 : 0    요소값 : tiger ​
-// 인덱스값 : 1    요소값 : 20 ​​
-// 인덱스값 : 2    요소값 : 3 
-// 인덱스값 : 3    요소값 : 4 ​
+
+//=====================================================================================================================================================================
+
+// // 일반 함수에서 this는 호출되는 시점의 this를 참조
+// // 에로우 함수에서 this는 자신이 만들어진 범위 밖의 함수의 this를 참조
+
+// // 생성자함수 (클래스) >> new
+// function Func(){
+//     this.num = 100;
+//     this.obj ={
+//         num: 200,
+//         f1: () => {
+//             //console.log(this);      //  Func { num: 100, obj: { num: 200, f1: [λ: f1], f2: [λ: f2] } }
+//             console.log(this.num);    //  100
+//         },
+//         f2: function(){
+//             //console.log(this);      //  { num: 200, f1: [λ: f1], f2: [λ: f2] }
+//             console.log(this.num);    //  200
+//         }
+//     }
+// }
+
+// let ins = new Func()    // 생성자함수를 통해 new로 만든 녀석은 객체가 아닌 인스턴스라고함..
+// ins.obj.f1()    // 100
+// ins.obj.f2()    // 200
 
 
-// forIn    요소 하나 출력하고 줄바꿈 일어남..
-for(const i in str){
-    console.log(str[i]);    // h, e, l, l, o
-}
+// // 객체안에서 람다함수를 사용할때는 this는 사용하지 말자
+// let obj ={          // {} {} {} 스코프 열고닫고 하는녀석 obj는 객체이다
+//     num: 100,
+//     func01: () => {
+//         console.log(this);      // {}
+//         console.log(this.num);  // undefined
+//     },
+//     func02: function(){
+//         console.log(this);      // { num: 100, func01: [λ: func01], func02: [λ: func02], func03: [λ: func03] }
+//         console.log(this.num);  // 100        
+//     },
+//     // func01을 최신문법[ES6]으로 바꾸면 아래의 코드가 된다
+//     func03(){
+//         console.log(this);      // { num: 100, func01: [λ: func01], func02: [λ: func02], func03: [λ: func03] }
+//         console.log(this.num);  // 100
+//     },
+// }
 
-for(const i in ar){
-    console.log(ar[i]);    // tiger, 20, 3, 4
-}
-
-for(const i in ins){
-    console.log(ins[i]);    // value, 진웅, 28
-}
+// obj.func01()    
+// obj.func02()    
+// obj.func03()
 
 
-// forOf
-for (const value of str) {
-    console.log(value);     // h, e, l, l, o
-}
+// // 객체안에서 람다함수를 사용할때는 this는 사용하지 말자
+// let obj ={
+//     num: 100,
+//     func01: () => {
+//         console.log(this);      // {}
+//         console.log(this.num);  // undefined
+//     },
+//     func02: function(){
+//         console.log(this);      // { num: 100, func01: [λ: func01], func02: [λ: func02], func03: [λ: func03] }
+//         console.log(this.num);  // 100
+//     },
+//     // func01을 최신문법[ES6]으로 바꾸면 아래의 코드가 된다
+//     func03(){
+//         console.log(this);      // { num: 100, func01: [λ: func01], func02: [λ: func02], func03: [λ: func03] }
+//         console.log(this.num);  // 100
+//     },
+// }
 
-for (const value of ar) {
-    console.log(value);     // tiger, 20, 3, 4
-}
+// obj.func01()    
+// obj.func02()    
+// obj.func03()
 
-// map
-const br = ar.map((item, i) => {
-    return {
-        id: i,
-        name: item
-    }
-})
-console.log(br);
+
+//=====================================================================================================================================================================
+
+
+// //            문자열          배열             객체
+// // length       O              O                X
+// // forEach      X              O                X
+// // forIn        O              O                O
+// // forOf        O              O                X
+// // map          X              O                X
+// //             ' '            [ ]              { }
+// //                            index           property
+
+// let str = 'hello'
+// let ar = ['tiger', 20, 3, '4']
+// let ins = {key: 'value', name: '진웅', age: 28}
+
+// // length
+// console.log(str.length);    // 5
+// console.log(ar.length);     // 4
+// console.log(ins.length);    // undefined
+
+
+// // forEach
+// ar.forEach((item, index) => {
+//     console.log(`인덱스값 : ${index}    요소값 : ${item}`);
+// })
+// // 출력값
+// // 인덱스값 : 0    요소값 : tiger ​
+// // 인덱스값 : 1    요소값 : 20 ​​
+// // 인덱스값 : 2    요소값 : 3 
+// // 인덱스값 : 3    요소값 : 4 ​
+
+
+// // forIn    요소 하나 출력하고 줄바꿈 일어남..
+// for(const i in str){
+//     console.log(str[i]);    // h, e, l, l, o
+// }
+
+// for(const i in ar){
+//     console.log(ar[i]);    // tiger, 20, 3, 4
+// }
+
+// for(const i in ins){
+//     console.log(ins[i]);    // value, 진웅, 28
+// }
+
+
+// // forOf
+// for (const value of str) {
+//     console.log(value);     // h, e, l, l, o
+// }
+
+// for (const value of ar) {
+//     console.log(value);     // tiger, 20, 3, 4
+// }
+
+// // map
+// const br = ar.map((item, i) => {
+//     return {
+//         id: i,
+//         name: item
+//     }
+// })
+// console.log(br);    
+// // 출력값
+// // [ { id: 0, name: 'tiger' },
+// // { id: 1, name: 20 },
+// // { id: 2, name: 3 },
+// // { id: 3, name: '4' } ]
 
 
 
