@@ -1,8 +1,302 @@
 //=====================================================================================================================================================================
 
+// // 구조 분해 할당
+// // 비구조화 할당
+
+// const user = {
+//     name: 'Jinwoong',
+//     age: 28,
+//     email: 'qwaszx3677@naver.com'
+// }
+// const {name, age, email, address} = user
+
+// console.log(`사용자의 이름은 ${name} 입니다`);
+// // 사용자의 이름은 Jinwoong 입니다
+// console.log(`${name}의 나이는 ${age} 입니다`);
+// // Jinwoong의 나이는 28 입니다
+// console.log(`${name}의 이메일 주소는 ${email} 입니다`);
+// // Jinwoong의 이메일 주소는 qwaszx3677@naver.com 입니다
+// console.log(address);
+// // undefined
+
+// const t = ['Apple', 'Banana', 'Orange']
+// const [a, b, c, d] = t
+// console.log(a, b, c, d);
+// // Apple Banana Orange undefined
+
+//=====================================================================================================================================================================
+
+// 객체를 JSON으로 변경시키기
+
+// 객체 생성
+let obj = {
+    a: 10,
+    b: '오랑이',
+}
+
+// 객체를 JSON문자열로 변경
+let str = JSON.stringify(obj);
+console.log(str, typeof(str));  // {"a":10,"b":"오랑이"} string
+
+// >>>> 전송....
+
+let obj2 = JSON.parse(str);
+console.log(obj2, typeof(obj2));    // {a: 10, b: '오랑이'} object
 
 
 
+
+
+
+
+//=====================================================================================================================================================================
+
+// //Math 함수
+// console.log(Math.PI);
+
+// // Math.random()
+// console.log(Math.random());     // 0.0 ~ 0.9 사이의 double가 출력된다!
+// console.log(Math.random()*10);  // 0.0 ~ 9.9 사이의 double가 출력된다!
+// console.log(Math.floor(Math.random() * 10));    // 0 ~ 9 사이의 정수가 출력된다!
+
+
+// // Math.sin()
+
+// let r = 30.0 * Math.PI / 180.0
+// console.log(r);
+
+// console.log(Math.sin(r));
+
+//=====================================================================================================================================================================
+
+// // 클래스 생성
+// function Apple(){
+//     this.a = 10
+// }
+
+// // 클래스 생성
+// function Orange(){
+//     this.b = 10
+// }
+
+// // Apple을 Orange가 상속받는다
+// Orange.prototype = new Apple();
+// Orange.prototype.constructor = Orange;
+
+// // Orange 인스턴스를 생성해서 사용하면
+// // 상속받았기 때문에 Apple의 요소 또한 사용됨
+// let ins = new Orange();
+// console.log(ins.a, ins.b);
+
+
+
+// // 클래스 생성
+// function Apple(){
+//     // Apple의 요소로써 query라는 객체를 갖는다
+//     this.query={
+//         naem: '오랑이',
+//         age: 120,
+//     }
+// }
+
+// // 클래스 생성
+// function Orange(){
+//     // Orange의 요소로써 req라는 객체를 갖는다
+//     this.req = {
+//         x: 10,
+//         y: 20,
+//     }
+// }
+
+// // Apple을 Orange가 상속받는다
+// Orange.prototype = new Apple();
+// Orange.prototype.constructor = Orange;
+
+// // Orange 인스턴스를 생성해서 사용하면
+// // 상속받았기 때문에 Apple의 요소 또한 사용됨
+// let ctx = new Orange();
+
+// // req는 보이는데 query라는 내용이 안보인다?
+// // query를 써지는 이유는 상속받은 Apple가 있기 떄문임
+// console.log(ctx);       
+// // req:{x: 10, y: 20}
+// // __proto__:Apple
+
+// console.log(ctx.query); // {naem: '오랑이', age: 120}
+// console.log(ctx.req);   // {x: 10, y: 20}
+
+
+
+
+
+
+//=====================================================================================================================================================================
+
+// // 객체를 만드네? {}를 사용하네?
+// // key: value, 를 사용하네?
+// let obj0 = {name:'오랑이0', n1: 10, n2: 60,}
+// let obj1 = {name:'오랑이1', n1: 20, n2: 70,}
+// let obj2 = {name:'오랑이2', n1: 30, n2: 80,}
+// let obj3 = {name:'오랑이3', n1: 40, n2: 90,}
+// let obj4 = {name:'오랑이4', n1: 50, n2: 10,}
+
+// // 비어있는 배열을 하나 만든다
+// let ar = [];
+
+// // 비어있는 배열에 생성된 객체를 push한다
+// ar.push(obj0);
+// ar.push(obj1);
+// ar.push(obj2);
+// ar.push(obj3);
+// ar.push(obj4);
+
+// ar.forEach(item => console.log(item))   // 배열에 있는 모든 요소가 출력됨
+// // 위의 코드를 람다식이 아닌 일반함수식으로 표현하면 아래의 코드와 같다
+// // ar.forEach(function(item){
+// //     console.log(item);
+// // })      // 배열에 있는 모든 요소가 출력됨
+
+
+
+// // 비어있는 배열을 하나 만든다
+// let ar = [];
+
+// // 비어있는 배열에 객체를 push
+// ar.push({name:'오랑이0', n1: 10, n2: 60,})
+// ar.push({name:'오랑이1', n1: 20, n2: 70,})
+// ar.push({name:'오랑이2', n1: 30, n2: 80,})
+// ar.push({name:'오랑이3', n1: 40, n2: 90,})
+// ar.push({name:'오랑이4', n1: 50, n2: 10,})
+
+// ar.forEach(item => console.log(item))   // 모든 요소 출력
+
+
+
+
+// // 생성자 함수를 만들어서 인스턴스로 리턴받아서 사용하겠다??
+// function Make(name, n1, n2) {
+//     this.name = name
+//     this.n1 = n1
+//     this.n2 = n2
+// }
+
+// // 비어있는 배열을 하나 만든다
+// let ar = [];
+
+// // 비어있는 배열에 push를 할건데 함수를 사용해서 리턴받은 인스턴스를 push함
+// ar.push(new Make('오랑이0',10, 60))
+// ar.push(new Make('오랑이1',20, 70))
+// ar.push(new Make('오랑이2',30, 80))
+// ar.push(new Make('오랑이3',40, 90))
+// ar.push(new Make('오랑이4',50, 10))
+
+// ar.forEach(item => console.log(item))   // 모든 요소 출력
+
+
+
+
+// // 생성자 함수를 만들어서 인스턴스로 리턴받아서 사용하겠다??
+// function Make(name, n1, n2) {
+//     this.name = name
+//     this.n1 = n1
+//     this.n2 = n2
+// }
+
+// // 비어있는 배열을 하나 만든다
+// let ar = [];
+
+// // 비어있는 배열에 push를 할건데 함수를 사용해서 리턴받은 인스턴스를 push함
+// ar.push(new Make('오랑이0',10, 60))
+// ar.push(new Make('오랑이1',20, 70))
+// ar.push(new Make('오랑이2',30, 80))
+// ar.push(new Make('오랑이3',40, 90))
+// ar.push(new Make('오랑이4',50, 10))
+
+
+// // 객체에 output이라는 함수를 추가하라
+// ar.forEach((item, i) =>{
+//     ar[i].sum = item.n1 + item.n2
+//     // ar[i].output = function(){
+//     //     console.log(item.name, item.n1, item.n2, item.sum);
+//     // }
+// })
+// Make.prototype.output = function(){
+//     console.log(this.name, this.n1, this.n2, this.sum);
+// }
+
+// for(let index in ar){
+//     ar[index].output();
+// }
+
+
+
+
+
+
+
+
+
+
+//=====================================================================================================================================================================
+
+
+// // f라는 함수가 객체가 생성될때 마다 계속 생성된다
+// function f1(){
+//     return{
+//         a: 10,
+//         f: function(){}
+//     }
+// }
+
+// let obj1 = f1()
+// let obj2 = f1()
+// console.log(obj1.f === obj2.f);     // false
+
+// // f라는 함수가 인스턴스가 생성될때 마다 계속 생성된다
+// function F1(){
+//     this.a = 10
+//     this. f = function(){
+
+//     }
+// }
+
+// let ins1 = new F1()
+// let ins2 = new F1()
+// console.log(ins1.f === ins2.f);     // false
+
+
+// // 인스턴스 생성할때마다 함수가 생성되니.. 메모리 측면에서 부담스럽다
+// // 이를 해결하기 위해서 prototype을 사용한다
+
+// function F2(){
+//     this.a = 10
+// }
+// F2.prototype.f = function(){}
+// // 프로토타입을 사용하면 하나의 함수를 만들어서 생성되는 인스턴스들이
+// // 공통적으로 사용할 수 있게된다.
+// let ins3 = new F2()
+// let ins4 = new F2()
+// console.log(ins3.f === ins4.f);     // true
+
+
+// let obj = {
+
+// }
+// obj.f1 = function(){
+//     console.log(1);
+// }
+// obj.f1();    // 1
+
+
+
+// function F1(){
+
+// }
+// F1.prototype.f1 = function(){
+//     console.log(2);
+// }
+// let ins1 = new F1()
+// ins1.f1()   // 2
 
 //=====================================================================================================================================================================
 
