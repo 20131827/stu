@@ -5,6 +5,314 @@
 
 
 
+
+//-------------------------------------------------------------------
+
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+// const user = {
+//     name: 'Jin',
+//     age: 28,
+//     emails: ['qwaszx3677@naver.com']
+// }
+// const copyUser = user;
+// console.log(copyUser === user); 
+// // true      [같은 메모리 영역을 사용하고있다는 의미이다!]
+
+// // user라는 객체의 age데이터를 수정했더니 copyUser의 age데이터도 수정되버렸다??!
+// user.age = 22
+// console.log('user', user);
+// // user {name: 'Jin', age: 22, emails: Array(1)}
+// console.log('copyUser', copyUser);
+// // copyUser {name: 'Jin', age: 22, emails: Array(1)}
+// // 이유 : user와 copyUser는 동일한 메모리 주소를 참조하고있기 때문에
+// // 둘다 데이터 수정이 되버렸다..
+
+// console.log('-------------------');
+
+// //=====================================================================================
+
+
+// // Object.assign() 얕은복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+// const user = {
+//     name: 'Jin',
+//     age: 28,
+//     emails: ['qwaszx3677@naver.com']
+// }
+// const copyUser = Object.assign({}, user)
+// // assign(대상객체, 출처객체)
+// // 위의 코드해석 : 빈객체에 user객체를 담아서 copyUser에 반환해라!
+
+// console.log(copyUser === user); 
+// // false    Object.assign()을 통해 새로운 객체를 할당받았기 때문에 참조하는 주소가 다르다!!
+
+// // user와 copyUser는 다른 메모리 주소를 참조하기 때문에 user객체에 age 데이터만 수정된다!
+// user.age = 22
+// console.log('user', user);
+// // user {name: 'Jin', age: 22, emails: Array(1)}
+// console.log('copyUser', copyUser);
+// // copyUser {name: 'Jin', age: 28, emails: Array(1)}
+// console.log('-------------------');
+
+// //=====================================================================================
+
+// // ... 전개연산 얕은복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+
+// const user = {
+//     name: 'Jin',
+//     age: 28,
+//     emails: ['qwaszx3677@naver.com']
+// }
+
+// const copyUser = {...user}
+// // copyUser라는 빈객체에 ... 전개연산을 통해  user가 가지고있는 속성과 값들을
+// // 전개해서 넣는다! 그러면 user와 copyUser는 다른 메모리주소를 참조하고있다!!
+
+// console.log(copyUser === user); 
+// // false    
+
+// // user와 copyUser는 다른 메모리 주소를 참조하기 때문에 user객체에 age 데이터만 수정된다!
+// user.age = 22
+// console.log('user', user);
+// // user {name: 'Jin', age: 22, emails: Array(1)}
+// console.log('copyUser', copyUser);
+// // copyUser {name: 'Jin', age: 28, emails: Array(1)}
+// console.log('-------------------');
+
+
+// user.emails.push('abc@gmaile.com')
+// // user의 emails라는 배열 속성에 값을 push했다
+// console.log(user.emails === copyUser.emails);   
+// // true      ????
+// // user라는 객체는 복사해서 copyUser를 만들었지만
+// // user객체 내부에 eamils라는 배열(참조형데이터)는 따로 복사 한적이 없기 때문에
+// // emails는 동일한 메모리주소를 참조하고있다.. 이게~~ 얕은 복사!!
+
+
+// //=====================================================================================
+
+// // 깊은 복사란??
+// // 참조형데이터 내부에 또다른 참조형 데이터를 포함하고 있다면 의도한 경우를 제외하고는
+// // 깊은복사를 사용하는것이 옳다!
+
+// // lodash를 사용해서 깊은복사 하기!
+// // 깊은 복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+
+// import _ from 'lodash'
+
+// const user = {
+//     name: 'Jin',
+//     age: 28,
+//     emails: ['qwaszx3677@naver.com']
+// }
+
+// // _ (lodash)를 사용해서  깊은 복사하기!!
+// const copyUser = _.cloneDeep(user)
+
+// console.log(copyUser === user); 
+// // false    
+
+// // user와 copyUser는 다른 메모리 주소를 참조하기 때문에 user객체에 age 데이터만 수정된다!
+// user.age = 22
+// console.log('user', user);
+// // user {name: 'Jin', age: 22, emails: Array(1)}
+// console.log('copyUser', copyUser);
+// // copyUser {name: 'Jin', age: 28, emails: Array(1)}
+// console.log('-------------------');
+
+
+// user.emails.push('abc@gmaile.com')
+// // user의 emails라는 배열 속성에 값을 push했다
+// console.log(user.emails === copyUser.emails);   
+// // flase
+// // 깊은 복사를 하면 껍데기 뿐만 아니라 내부의 참조형데이터들 또한 전부다 복사가 되기 때문!
+
+
+//-------------------------------------------------------------------
+// // 데이터 불변성
+// // 원시 데이터 : String, Number, Boolean, undefined, null
+// // 참조형 데이터 : Object, Array, Function
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+
+// // 원시 데이터들은 메모리 영역에 같은 데이터값이 있으면 새로운 메모리 영역에 
+// // 할당받아 만들지 않고 기존의 똑같은 데이터가 있는 메모리 주소를 참조해서 사용하게 된다!
+// // 원시 데이터들은 생긴것(값)이 다르면 다른데이터 라고 생각하면 아주 쉽다!
+
+// let a = 1;
+// let b = 4;
+// console.log(a, b, a === b); // 1 4 false
+// b = a;
+// console.log(a, b, a === b); // 1 1 true
+// a = 7;
+// console.log(a, b, a === b); // 7 1 false
+// let c = 1;  // 새로운 메모리 영역에 데이터를 할당하는것이 아닌 
+//             // 기존의 메모리 영역에 데이터를 찾아서 같은 데이터가 있다면 
+//             // 기존 메모리의 주소를 참조해서 사용하게 된다!!!
+// console.log(b, c, b === c); // 1 1 true
+
+
+// // 데이터 가변성
+// // 참조형 데이터는 불변성이 없다! 가변성만 존재할 뿐!
+// // 참조형 데이터는 생긴것(값)이 똑같아도 다른데이터 일 수 있다!
+// // 참조형 데이터는 같은 데이터 라도 생성될때마다 새로운 메모리 영역을 할당받아 사용한다!!
+// // ----------------------------------------------------------------------
+// // |1:  {        }   |2:  {        }   |3:  {        }   |4:  {        }   
+// // ----------------------------------------------------------------------
+
+// // 객체1 = 객체2
+// // 일때 데이터가 복사되는 개념이 아닌 객체2의 주소를 객체1에게 던져주고
+// // 객체1은 객체2에게 받은 메모리 주소를 참조하는것이다
+
+// let a = {k: 1}
+// let b = {k: 1}
+// console.log(a, b, a === b); // {k: 1} {k: 1} false
+// a.k = 7
+// b = a   // a가 바라보고 있는 주소를 b또한 바라보게 된다
+// console.log(a, b, a === b); // {k: 7} {k: 7} true
+// a.k = 2 // a가 바라보고있는 주소의 데이터 k를 2로 변경했더니 b의 k또한 값이 바꼇다!
+//         // 당연한 말인 이유 :  a와 b둘다 같은 주소를 바라보고있으니까! 바뀐 데이터를 둘다 참조하고있으니까!
+// console.log(a, b, a === b); // {k: 2} {k: 2} true
+// let c = b   // b가 바라보고있는 주소를 c또한 바라보게 된다
+// console.log(a, b, c, a === c);  // {k: 2} {k: 2} {k: 2} true
+// a.k = 9  // a가 바라보고있는 주소의 데이터 k를 9로 변경했더니 b와 c의 k값이 바꼇다!
+//          // 당연한 말인 이유 :  a, b, c 셋다 같은 주소를 바라보고있으니까! 바뀐 데이터를 3명이서 참조하고있으니까!
+// console.log(a, b, c, a === c);  //{k: 9} {k: 9} {k: 9} true
+
+
+
+
+
+
+//-------------------------------------------------------------------
+// // 전개 연산자 [Spread] ...
+// // 쉼표로 구분되어있는 데이터 덩어리를 가져오는 연산자이다!
+
+// const f = ['Apple', 'Banana', 'Orange','Cherry']
+// console.log(f);
+// // ['Apple', 'Banana', 'Orange']
+// console.log(...f);  // console.log('Apple', 'Banana', 'Orange'); 와 같은 코드이다
+// // Apple Banana Orange
+
+// // 배열데이터를 객체데이터로 변경시키는 함수를 만들어봤다!
+// function toObj(a, b, c){
+//     return{
+//         a: a,
+//         b: b,
+//         c: c
+//     }
+// }
+// console.log(toObj(...f)); 
+// // {a: 'Apple', b: 'Banana', c: 'Orange'}
+
+// //toObj(...f); // 이 코드는 toObj(f[0], f[1], f[2]); 와 같은 코드이다!
+
+// function toObj2(a, b, ...c){    // ...c 는 rest parameter라고한다! [나머지 매개변수]
+//     return{
+//         a: a,
+//         b: b,
+//         c: c
+//     }
+// }
+// console.log(toObj2(...f));
+// //a:'Apple'
+// //b:'Banana'
+// //c: ['Orange', 'Cherry']
+
+
+// // 속성의 이름과 변수의 이름이 똑같다면 축약형으로 작성이 가능하다!!
+// function toObj3(a, b, ...c){  
+//     return{
+//         a,  //a: a,
+//         b,  //b: b,
+//         c   //c: c
+//     }
+// }
+// console.log(toObj3(...f));
+// //a:'Apple'
+// //b:'Banana'
+// //c: ['Orange', 'Cherry']
+
+
+
+// // 객체 데이터를 반환할 때는 ()소괄호 안에 {}중괄호를 써야지 데이터 반환이 된다!
+// const toObj4 = (a, b, ...c) => ({a, b, c})
+// console.log(toObj4(...f));
+// //a:'Apple'
+// //b:'Banana'
+// //c: ['Orange', 'Cherry']
+
+//-------------------------------------------------------------------
+// // 구조 분해 할당
+// // 비구조화 할당
+
+// const user = {
+//     name: 'Jinwoong',
+//     age: 28,
+//     email: 'qwaszx3677@naver.com',
+//     address : 'USA'
+// }
+
+// // =연산자를 통해서 객체의 프로퍼티와 같은 이름인 변수를 선언해서 사용할 수 있다!
+// // 이러한 개념을 구조분해 할당 이라 한다.
+// // 아래의 코드는 user.name | user.age | user.emial | user,address와 같은 개념..!
+// const {name: me, age, email, address = 'Korea'} = user
+// // 위의 코드에서 address = 'Korea' 부분은 user라는 객체에서 address 프로퍼티에 값이 없다면
+// // 기본값 (초기값)으로 Korea를 주겠다는 의미이다!
+// // name이라는 이름말고 me라는 이름의 변수를 사용할때는 
+// // name: 사용할 변수명 으로 사용이 가능하다!
+// // : 를 사용해서 다른 이름으로 할당했다면 아래의 코드에서 me로 써야한다
+// // name을 출력하려고 하면 레퍼런스 에러가 발생한다!
+
+// console.log(`사용자의 이름은 ${me} 입니다`);
+// // 사용자의 이름은 Jinwoong 입니다
+// console.log(`${me}의 나이는 ${age} 입니다`);
+// // Jinwoong의 나이는 28 입니다
+// console.log(`${me}의 이메일 주소는 ${email} 입니다`);
+// // Jinwoong의 이메일 주소는 qwaszx3677@naver.com 입니다
+// console.log(address);
+// // USA
+// // 기본값 할당은 해당 객체의 프로퍼티에 값이 없을때 적용이 되는데
+// // user객체에 address프로퍼티에 값이 있기 때문에 USA가 출력됨
+
+
+// const t = ['Apple', 'Banana', 'Orange']
+// // 구조분해하는 데이터의 타입에 맞게 작성해야한다!
+// // t라는 변수는 배열타입을 할당받았기 때문에 아래의 코드에서도
+// // [] 대괄호를 사용해서 구조분해 할당을 해야한다!!
+// // 배열데이터는 속성(프로퍼티)의 이름을 사용하는게 아니라 위치에 맞게 추출해야함
+// const [a, b, c, d] = t
+// console.log(a, b, c, d);
+// // Apple Banana Orange undefined
+
+
+// const tt = ['Apple', 'Banana', 'Orange']
+// // Banana만 출력하고 싶을떄는?
+// const[, bb] = tt
+// console.log(bb);
+// //Banana
+
+
+
+
+
 //-------------------------------------------------------------------
 
 // // assign( )*   [원본데이터 손상]
