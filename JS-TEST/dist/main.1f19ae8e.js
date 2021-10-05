@@ -19370,17 +19370,49 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"node_modules/buffer/index.js"}],"main.js":[function(require,module,exports) {
+},{"buffer":"node_modules/buffer/index.js"}],"getType.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getType;
+
+function getType(data) {
+  return Object.prototype.toString.call(data).slice(8, -1);
+}
+},{}],"getRandom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = random;
+
+function random() {
+  return Math.floor(Math.random() * 10);
+}
+},{}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
+var _getType = _interopRequireDefault(require("./getType"));
+
+var _getRandom = _interopRequireDefault(require("./getRandom"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //-------------------------------------------------------------------
-// ----------------------------------------------------------------
-// |1:             |2:             |3:             |4:         
-// ----------------------------------------------------------------
+// from 'node_modules'!
+// getType.js
+// getRandom.js
+console.log(_lodash.default.camelCase('the hello world'));
+console.log((0, _getType.default)([1, 2, 3]));
+console.log((0, _getRandom.default)(), (0, _getRandom.default)()); //-------------------------------------------------------------------
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
 // // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
 // const user = {
 //     name: 'Jin',
@@ -19399,10 +19431,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // // 이유 : user와 copyUser는 동일한 메모리 주소를 참조하고있기 때문에
 // // 둘다 데이터 수정이 되버렸다..
 // console.log('-------------------');
-// 복사 Object.assign() 얕은복사
-// ----------------------------------------------------------------
-// |1:             |2:             |3:             |4:         
-// ----------------------------------------------------------------
+// //=====================================================================================
+// // Object.assign() 얕은복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
 // // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
 // const user = {
 //     name: 'Jin',
@@ -19421,11 +19454,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // console.log('copyUser', copyUser);
 // // copyUser {name: 'Jin', age: 28, emails: Array(1)}
 // console.log('-------------------');
-// 복사 ... 전개연산 얕은복사
-// ----------------------------------------------------------------
-// |1:             |2:             |3:             |4:         
-// ----------------------------------------------------------------
-// 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+// //=====================================================================================
+// // ... 전개연산 얕은복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
 // const user = {
 //     name: 'Jin',
 //     age: 28,
@@ -19450,31 +19484,39 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // // user라는 객체는 복사해서 copyUser를 만들었지만
 // // user객체 내부에 eamils라는 배열(참조형데이터)는 따로 복사 한적이 없기 때문에
 // // emails는 동일한 메모리주소를 참조하고있다.. 이게~~ 얕은 복사!!
-// 깊은 복사
-// ----------------------------------------------------------------
-// |1:             |2:             |3:             |4:         
-// ----------------------------------------------------------------
-// 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
-var user = {
-  name: 'Jin',
-  age: 28,
-  emails: ['qwaszx3677@naver.com']
-}; // _ (lodash)를 사용해서  깊은 복사하기!!
-
-var copyUser = _lodash.default.cloneDeep(user);
-
-console.log(copyUser === user); // false    
-// user와 copyUser는 다른 메모리 주소를 참조하기 때문에 user객체에 age 데이터만 수정된다!
-
-user.age = 22;
-console.log('user', user); // user {name: 'Jin', age: 22, emails: Array(1)}
-
-console.log('copyUser', copyUser); // copyUser {name: 'Jin', age: 28, emails: Array(1)}
-
-console.log('-------------------');
-user.emails.push('abc@gmaile.com'); // user의 emails라는 배열 속성에 값을 push했다
-
-console.log(user.emails === copyUser.emails); //-------------------------------------------------------------------
+// //=====================================================================================
+// // 깊은 복사란??
+// // 참조형데이터 내부에 또다른 참조형 데이터를 포함하고 있다면 의도한 경우를 제외하고는
+// // 깊은복사를 사용하는것이 옳다!
+// // lodash를 사용해서 깊은복사 하기!
+// // 깊은 복사
+// // ----------------------------------------------------------------
+// // |1:             |2:             |3:             |4:         
+// // ----------------------------------------------------------------
+// // 얕은 복사(Shallow copy), 깊은 복사(Deep copy)
+// import _ from 'lodash'
+// const user = {
+//     name: 'Jin',
+//     age: 28,
+//     emails: ['qwaszx3677@naver.com']
+// }
+// // _ (lodash)를 사용해서  깊은 복사하기!!
+// const copyUser = _.cloneDeep(user)
+// console.log(copyUser === user); 
+// // false    
+// // user와 copyUser는 다른 메모리 주소를 참조하기 때문에 user객체에 age 데이터만 수정된다!
+// user.age = 22
+// console.log('user', user);
+// // user {name: 'Jin', age: 22, emails: Array(1)}
+// console.log('copyUser', copyUser);
+// // copyUser {name: 'Jin', age: 28, emails: Array(1)}
+// console.log('-------------------');
+// user.emails.push('abc@gmaile.com')
+// // user의 emails라는 배열 속성에 값을 push했다
+// console.log(user.emails === copyUser.emails);   
+// // flase
+// // 깊은 복사를 하면 껍데기 뿐만 아니라 내부의 참조형데이터들 또한 전부다 복사가 되기 때문!
+//-------------------------------------------------------------------
 // // 데이터 불변성
 // // 원시 데이터 : String, Number, Boolean, undefined, null
 // // 참조형 데이터 : Object, Array, Function
@@ -20172,7 +20214,7 @@ console.log(user.emails === copyUser.emails); //--------------------------------
 //     console.log('ㅎㅇㅎㅇ');
 //     console.log(ulEl);
 // }
-},{"lodash":"node_modules/lodash/lodash.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"lodash":"node_modules/lodash/lodash.js","./getType":"getType.js","./getRandom":"getRandom.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -20200,7 +20242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57969" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53279" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
